@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the evolent_contact_form module.
+ */
+
+
+/**
+ * Implements hook_schema().
+ * Defines the database tables used by this module.
+ * @see hook_schema()
+ */
+function evolent_contact_schema() {
+  $schema['evolent_contact'] = [
+    'description' => 'This Stores evolent user contact detail for demonstration purposes.',
+    'fields' => [
+      'cid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => "Primary Key: Unique comntact ID.",
+      ],
+      'first_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'First name of the person.',
+      ],
+      'last_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Last name of the person.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Email of the person.',
+      ],
+      'phone_no' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Phone number of the person.',
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => TRUE,
+        '#default_value' => 'Active',
+        '#options' => array('Active' => 'Active', 'Deactive' => 'Deactive'),
+      ],
+      'last_updated' => [
+        'description' => 'The Unix timestamp when the contact created or updated.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['cid'],
+    'indexes' => [
+      'first_name' => ['first_name'],
+      'last_name' => ['last_name'],
+      'email' => ['email'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ * Creates some default entries on this module custom table.
+ * @see hook_install()
+ * @ingroup evolent_contact
+ */
+function evolent_contact_install() {
+  // Insert some example data into our schema.
+  $entries = [
+    [
+      'cid' => 1,
+      'first_name' => 'Sandip',
+      'last_name' => 'Wankhede',
+      'email' => 'sandipwan95@gmail.com',
+      'phone_no' => 9545232724,
+      'status' => 0
+    ]
+  ];
+
+  $connection = \Drupal::database();
+  foreach ($entries as $entry) {
+    $connection->insert('evolent_contact')->fields($entry)->execute();
+  }
+}
+
+

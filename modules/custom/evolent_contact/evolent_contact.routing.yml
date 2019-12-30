@@ -1,0 +1,28 @@
+evolent_contact.add:
+  path: '/evolent_contact/add'
+  defaults:
+    _form: '\Drupal\evolent_contact\Form\EvolentContactAddForm'
+    _title: 'Add contact detail form , Evolent Health demo project '
+  requirements:
+    _permission: 'access content'
+
+evolent_contact.edit:
+  path: '/evolent_contact/edit'
+  defaults:
+    _form: '\Drupal\evolent_contact\Form\EvolentContactEditForm'
+    _title: 'Edit contact detail form , Evolent Health demo project'
+  requirements:
+    _permission: 'access content'
+
+evolent_contact.delete:
+  path: '/evolent_contact/delete'
+  defaults:
+    _form: '\Drupal\evolent_contact\Form\EvolentContactDeleteForm'
+    _title: 'Delete contact detail form , Evolent Health demo project'
+  requirements:
+    _permission: 'access content'
+
+evolent_contact.list:
+  path: '/evolent_contact/list'
+  requirements:
+    _permission: 'access content'
